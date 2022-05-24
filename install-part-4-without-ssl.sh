@@ -2,6 +2,5 @@
 sudo ln -s /etc/apache2/sites-available/shadowsdash.conf /etc/apache2/sites-enabled/shadowsdash.conf
 sudo a2enmod rewrite
 sudo systemctl restart apache2
-cd /var/www/html
-rm index.html
-echo "Upload your copy of Shadow's Dash to this directory!"
+rm /var/www/html/index.html
+echo "Go to the directory /var/www/html and upload your copy of Shadow's Dash to this directory!"
