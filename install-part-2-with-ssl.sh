@@ -13,3 +13,12 @@ sudo apt install -y php8.0-mysql php8.0-common php8.0-mysql php8.0-xml php8.0-xm
 sudo apt install -y zip unzip wget
 # Restart apache
 sudo systemctl restart apache2
+# Move to apache configuration directory
+cd /etc/apache2/sites-available
+# Remove the default configuration
+a2dissite 000-default.conf
+rm 000-default.conf
+# Get the new configuration
+wget https://raw.githubusercontent.com/zymsbgt/shadowsdash-installer/main/shadowsdash-withssl.conf
+# Tell the user to open the config with Nano
+echo "Type 'nano /etc/apache2/sites-available/shadowsdash-nossl.conf' and replace the <domain> field with your own domain!"

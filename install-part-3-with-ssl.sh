@@ -1,9 +1,7 @@
 #!/bin/sh
-cd /etc/apache2/sites-available
-# Remove the default configuration
-a2dissite 000-default.conf
-rm 000-default.conf
-# Get the new configuration
-wget https://raw.githubusercontent.com/zymsbgt/shadowsdash-installer/main/shadowsdash-withssl.conf
-# Open up the file with Nano for user to edit the <domain> field
-nano shadowsdash-withssl.conf
+sudo ln -s /etc/apache2/sites-available/shadowsdash.conf /etc/apache2/sites-enabled/shadowsdash.conf
+sudo a2enmod rewrite
+sudo a2enmod ssl
+sudo systemctl restart apache2
+rm /var/www/html/index.html
+echo "Go to the directory /var/www/html and upload your copy of Shadow's Dash to this directory!"
