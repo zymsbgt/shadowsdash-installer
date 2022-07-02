@@ -19,6 +19,19 @@ cd /etc/apache2/sites-available
 a2dissite 000-default.conf
 rm 000-default.conf
 # Get the new configuration
-wget https://raw.githubusercontent.com/zymsbgt/shadowsdash-installer/main/shadowsdash-nossl.conf
+wget https://raw.githubusercontent.com/zymsbgt/shadowsdash-installer/main/shadowsdash-withssl.conf
 # Tell the user to open the config with Nano
-echo "Type 'nano /etc/apache2/sites-available/shadowsdash-nossl.conf' and replace the <domain> field with your own domain!"
+echo "Opening /etc/apache2/sites-available/shadowsdash-nossl.conf in 5 second. Replace the <domain> field with your own domain, save the file and exit."
+sleep 5
+sudo nano /etc/apache2/sites-available/shadowsdash-nossl.conf
+
+sudo ln -s /etc/apache2/sites-available/shadowsdash.conf /etc/apache2/sites-enabled/shadowsdash.conf
+sudo a2enmod rewrite
+sudo a2enmod ssl
+sudo systemctl restart apache2
+rm /var/www/html/index.html
+echo "Go to the directory /var/www/html and upload your copy of Shadow's Dash to this directory! Type exit after you're done to continue the installation."
+bash
+
+crontab -e */2 * * * * php /var/www/html/scripts/queueHandler.php >/dev/null 2>&1
+echo "Install finished!"
